@@ -82,6 +82,11 @@ urlpatterns = [  # pylint: disable=invalid-name
         offers_views.OffersJoin.as_view(),
         name='offers_join'
     ),
+    url(
+        r'^offers/gallery/(?P<pk>[0-9]+)/delete$',
+        offers_views.OffersGalleryDelete.as_view(),
+        name='offer_gallery_delete'
+    ),
     # offers/filter
 
     # users' namesapce:

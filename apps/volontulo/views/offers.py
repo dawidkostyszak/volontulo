@@ -13,6 +13,7 @@ from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.text import slugify
 from django.views.generic import View
+from django.views.generic.edit import DeleteView
 
 from apps.volontulo.forms import (
     CreateOfferForm, OfferApplyForm, OfferImageForm
@@ -539,3 +540,18 @@ class OffersArchived(View):
         return render(request, 'offers/archived.html', {
             'offers': Offer.objects.get_archived()
         })
+
+
+class OffersGalleryDelete(DeleteView):
+    """Class based view to delete offers image."""
+    model = OfferImage
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        image = self.model.objects.get(id=kwargs.get('pk'))
+        self.success_url = reverse(
+            'offers_edit', args=[slugify(image.offer.title), image.offer.id])
+        return super(OffersGalleryDelete, self).delete(
+            request, *args, **kwargs)

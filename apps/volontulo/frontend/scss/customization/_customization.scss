@@ -386,3 +386,15 @@ input.form-control[required] {
         }
     }
 }
+
+.offer-image {
+    position: relative;
+    .remove_image {
+        position: absolute;
+        top: -5px;
+        right: -2.5px;
+        font-size: 20px;
+        text-decoration: none;
+        color: black;
+    }
+}
