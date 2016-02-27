@@ -542,7 +542,7 @@ class OffersArchived(View):
         })
 
 
-class OffersGalleryDelete(DeleteView):
+class OffersGalleryDelete(DeleteView):  # pylint: disable=too-many-ancestors
     """Class based view to delete offers image."""
     model = OfferImage
 
@@ -552,6 +552,8 @@ class OffersGalleryDelete(DeleteView):
     def delete(self, request, *args, **kwargs):
         image = self.model.objects.get(id=kwargs.get('pk'))
         self.success_url = reverse(
-            'offers_edit', args=[slugify(image.offer.title), image.offer.id])
+            'offers_edit', args=[slugify(image.offer.title), image.offer.id]
+        )
         return super(OffersGalleryDelete, self).delete(
-            request, *args, **kwargs)
+            request, *args, **kwargs
+        )
