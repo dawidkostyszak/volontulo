@@ -546,9 +546,6 @@ class OffersGalleryDelete(DeleteView):  # pylint: disable=too-many-ancestors
     """Class based view to delete offers image."""
     model = OfferImage
 
-    def get(self, request, *args, **kwargs):
-        return self.post(request, *args, **kwargs)
-
     def delete(self, request, *args, **kwargs):
         image = self.model.objects.get(id=kwargs.get('pk'))
         self.success_url = reverse(
